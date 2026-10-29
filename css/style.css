@@ -587,7 +587,8 @@ body {
 
 /* ─────────────── Màn mở phong thư ─────────────── */
 /* Trình phát YouTube ẩn khỏi màn hình nhưng vẫn phát được tiếng */
-.yt-hidden { position: fixed; left: -9999px; top: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.yt-hidden { position: fixed; left: -9999px; top: -9999px; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none; }
+.yt-hidden iframe { width: 1px !important; height: 1px !important; }
 
 .envelope-intro {
   position: fixed; inset: 0; z-index: 2000;

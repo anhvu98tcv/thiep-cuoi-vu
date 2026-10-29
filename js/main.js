@@ -26,6 +26,8 @@ const CONFIG = {
   youtubeId: "pBTp2RWxq-s",
 
   // Nhạc dự phòng (phát khi không có/không nhúng được YouTube). Bỏ file vào đúng đường dẫn này.
+  // ⚠️ TRÊN ĐIỆN THOẠI LUÔN DÙNG FILE NÀY (không dùng YouTube), vì điện thoại — nhất là khi mở
+  //    từ Zalo/Facebook/iPhone — sẽ bật video YouTube lên toàn màn hình thay vì phát nhạc ẩn.
   musicFile: "assets/music.mp3",
 };
 
@@ -147,18 +149,30 @@ const CONFIG = {
     });
   }
 
-  // Nạp YouTube IFrame API (nếu có cấu hình ID)
-  if (CONFIG.youtubeId) {
+  // Điện thoại/máy tính bảng: KHÔNG dùng YouTube (sẽ bật video toàn màn hình) → chỉ phát mp3
+  const isMobile =
+    /Android|iPhone|iPad|iPod|Mobile|Zalo|FBAN|FBAV|Instagram|Line\//i.test(navigator.userAgent) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1) || // iPad đời mới
+    window.matchMedia("(pointer: coarse)").matches;
+  const useYouTube = Boolean(CONFIG.youtubeId) && !isMobile;
+  if (!useYouTube) {
+    const yt = document.querySelector(".yt-hidden");
+    if (yt) yt.remove();
+  }
+
+  // Nạp YouTube IFrame API (chỉ trên máy tính)
+  if (useYouTube) {
     const tag = document.createElement("script");
     tag.src = "https://www.youtube.com/iframe_api";
     document.head.appendChild(tag);
 
     window.onYouTubeIframeAPIReady = function () {
       player = new YT.Player("ytPlayer", {
+        width: 1, height: 1,
         videoId: CONFIG.youtubeId,
         playerVars: {
           autoplay: 0, controls: 0, loop: 1, playlist: CONFIG.youtubeId,
-          playsinline: 1, modestbranding: 1, rel: 0,
+          playsinline: 1, modestbranding: 1, rel: 0, fs: 0, disablekb: 1, iv_load_policy: 3,
         },
         events: {
           onReady: () => { ready = true; if (wantPlay && !ytFailed) player.playVideo(); },
@@ -176,7 +190,7 @@ const CONFIG = {
   // Bắt đầu phát (ưu tiên YouTube, không được thì mp3)
   function startPlay() {
     wantPlay = true;
-    if (ytFailed || !CONFIG.youtubeId) { playFile(); return; }
+    if (ytFailed || !useYouTube) { playFile(); return; }
     if (player && ready) player.playVideo();
     // chưa ready: đợi onReady; nếu lỗi: onError sẽ gọi playFile()
   }
@@ -184,7 +198,7 @@ const CONFIG = {
   // Nút nhạc góc màn hình: bật/tắt
   if (btn) {
     btn.addEventListener("click", () => {
-      if (source === "file" || ytFailed) {
+      if (source === "file" || ytFailed || !useYouTube) {
         if (playing) { audio.pause(); setPlaying(false); }
         else playFile();
         return;

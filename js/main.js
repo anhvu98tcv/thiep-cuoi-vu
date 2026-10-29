@@ -203,11 +203,12 @@ const CONFIG = {
     if (!intro || intro.classList.contains("open")) return;
     intro.classList.add("open"); // chạy animation mở nắp + lộ lá thư
     startPlay();
+    // Nhịp: nắp mở (~.62s) → lá thư trồi lên (xong ~1.32s) → giữ một nhịp → mờ dần
     setTimeout(() => {
       intro.classList.add("hide");
       document.body.style.overflow = ""; // trả lại cuộn trang
-    }, 900);
-    setTimeout(() => { intro.style.display = "none"; }, 1800);
+    }, 1700);
+    setTimeout(() => { intro.style.display = "none"; }, 2750);
   }
   if (openBtn) openBtn.addEventListener("click", openEnvelope);
 })();

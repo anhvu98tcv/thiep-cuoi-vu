@@ -24,6 +24,24 @@
 </head>
 
 <body>
+  <!-- ═══ MÀN MỞ PHONG THƯ — hiện đầu tiên, nhấn để vào thiệp & phát nhạc ═══ -->
+  <div class="envelope-intro" id="envelopeIntro">
+    <div class="env-stage">
+      <button class="envelope" id="envelopeOpen" aria-label="Mở thiệp mời và phát nhạc">
+        <span class="env-back"></span>
+        <span class="env-letter">
+          <span class="env-l-eyebrow">Save the Date</span>
+          <span class="env-l-names">Anh Vũ <span class="amp">&amp;</span> Hồng Ngọc</span>
+          <span class="env-l-date">14 . 11 . 2026</span>
+        </span>
+        <span class="env-front"></span>
+        <span class="env-flap"></span>
+        <span class="env-seal">💍</span>
+      </button>
+      <p class="env-hint">Nhấn vào phong thư để mở thiệp &amp; phát nhạc ♪</p>
+    </div>
+  </div>
+
   <!-- Hiệu ứng cánh hoa rơi (được tạo bằng JS) -->
   <div class="petals" aria-hidden="true"></div>
 
@@ -31,10 +49,11 @@
   <button class="music-toggle" id="musicToggle" aria-label="Bật/tắt nhạc" title="Bật/tắt nhạc nền">
     <span class="music-icon">♪</span>
   </button>
-  <!-- 👇 THÊM FILE NHẠC vào assets/music.mp3 để có nhạc nền -->
-  <audio id="bgMusic" loop preload="none">
-    <source src="assets/music.mp3" type="audio/mpeg" />
-  </audio>
+  <!-- 👇 NHẠC NỀN LẤY TỪ YOUTUBE (bài "I Do"). Đổi video trong js/main.js → CONFIG.youtubeId.
+       Trình phát YouTube được ẩn; nhạc phát khi khách nhấn mở phong thư.
+       Nếu video bị chặn nhúng, trang tự chuyển sang phát file assets/music.mp3 bên dưới. -->
+  <div class="yt-hidden" aria-hidden="true"><div id="ytPlayer"></div></div>
+  <audio id="bgMusic" loop preload="none" src="assets/music.mp3"></audio>
 
   <!-- Thanh điều hướng -->
   <nav class="navbar" id="navbar">
@@ -212,6 +231,15 @@
           </label>
         </div>
 
+        <!-- 👇 KHÁCH CHỌN CÓ ĐI XE ĐƯA ĐÓN HAY KHÔNG -->
+        <label>Bạn có đi xe đưa đón không? <span class="req">*</span>
+          <select name="transport" required>
+            <option value="">— Chọn —</option>
+            <option value="Có, mình đi xe đưa đón">Có, mình đi xe đưa đón 🚌</option>
+            <option value="Không, mình tự di chuyển">Không, mình tự di chuyển 🚗</option>
+          </select>
+        </label>
+
         <label>Lời chúc gửi tới cô dâu &amp; chú rể
           <textarea name="message" rows="3" placeholder="Chúc hai bạn trăm năm hạnh phúc..."></textarea>
         </label>
@@ -262,12 +290,11 @@
           <div class="gift-card">
             <div class="gift-icon">🤵</div>
             <h3>Chú rể</h3>
-            <!-- 👇 THÔNG TIN NGÂN HÀNG CHÚ RỂ. Có ảnh QR thì thay dòng gift-qr bằng:
-                 <div class="gift-qr has-img"><img src="assets/QR-ChuRe.PNG" alt="Mã QR chuyển khoản chú rể" loading="lazy" /></div> -->
+            <!-- 👇 THÔNG TIN NGÂN HÀNG CHÚ RỂ -->
             <p class="gift-bank">Ngân hàng [Tên ngân hàng]</p>
             <p class="gift-number">[Số tài khoản]</p>
             <p class="gift-owner">ANH VU</p>
-            <div class="gift-qr" data-label="QR chuyển khoản"></div>
+            <div class="gift-qr has-img"><img src="assets/QR.PNG" alt="Mã QR chuyển khoản chú rể" loading="lazy" /></div>
           </div>
         </div>
       </div>

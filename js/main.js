@@ -16,6 +16,17 @@ const CONFIG = {
   // Hướng dẫn: xem README.md, mục "Lưu xác nhận vào Google Sheet".
   // Để trống "" thì form vẫn chạy (hiện lời cảm ơn) nhưng KHÔNG lưu lại.
   rsvpEndpoint: "https://script.google.com/macros/s/AKfycbzMKlnoIbjilDAZHJbM87_TeKlIPaPgKFDnepkzNHEQ2LbDdxgqmnWgZKX9QSIhQfSkRg/exec",
+
+  // Nhạc nền lấy từ YouTube — dán ID video vào đây (phần sau "watch?v=").
+  // Hiện tại là bài "I Do" (911): https://www.youtube.com/watch?v=pBTp2RWxq-s
+  // ⚠️ LƯU Ý: nhiều video (gồm cả ID này) bị chủ kênh TẮT NHÚNG nên KHÔNG phát được
+  //    trong web. Khi đó trang sẽ tự chuyển sang phát file "musicFile" bên dưới.
+  //    Muốn chắc chắn có nhạc: tải bài hát ra file assets/music.mp3.
+  //    Để youtubeId = "" nếu chỉ muốn dùng file mp3.
+  youtubeId: "pBTp2RWxq-s",
+
+  // Nhạc dự phòng (phát khi không có/không nhúng được YouTube). Bỏ file vào đúng đường dẫn này.
+  musicFile: "assets/music.mp3",
 };
 
 /* ════════════════════ Dưới đây là phần xử lý, không cần sửa ════════════════════ */
@@ -105,24 +116,100 @@ const CONFIG = {
   }
 })();
 
-/* ── 5. Nhạc nền ── */
+/* ── 5. Nhạc nền (YouTube, tự chuyển mp3 nếu bị chặn nhúng) + mở phong thư ── */
 (function music() {
   const btn = document.getElementById("musicToggle");
-  const audio = document.getElementById("bgMusic");
-  if (!btn || !audio) return;
-  let playing = false;
-  btn.addEventListener("click", () => {
-    if (playing) {
-      audio.pause();
-      btn.classList.remove("playing");
-    } else {
-      audio.play().catch(() => {
-        // Chưa có file assets/music.mp3 hoặc trình duyệt chặn — bỏ qua êm ái
+  const intro = document.getElementById("envelopeIntro");
+  const openBtn = document.getElementById("envelopeOpen");
+  const audio = document.getElementById("bgMusic"); // nhạc dự phòng (mp3)
+
+  let player = null;     // trình phát YouTube
+  let ready = false;     // YouTube đã sẵn sàng chưa
+  let ytFailed = false;  // YouTube lỗi/chặn nhúng → dùng mp3
+  let playing = false;   // đang phát hay không
+  let wantPlay = false;  // người dùng đã yêu cầu phát
+  let source = null;     // "yt" hoặc "file"
+
+  // Khoá cuộn trang khi màn phong thư còn hiển thị
+  if (intro) document.body.style.overflow = "hidden";
+
+  function setPlaying(on) {
+    playing = on;
+    if (btn) btn.classList.toggle("playing", on);
+  }
+
+  // Phát file mp3 dự phòng
+  function playFile() {
+    if (!audio) return;
+    source = "file";
+    audio.play().then(() => setPlaying(true)).catch(() => {
+      // Chưa có assets/music.mp3 hoặc trình duyệt chặn — bỏ qua êm ái
+    });
+  }
+
+  // Nạp YouTube IFrame API (nếu có cấu hình ID)
+  if (CONFIG.youtubeId) {
+    const tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(tag);
+
+    window.onYouTubeIframeAPIReady = function () {
+      player = new YT.Player("ytPlayer", {
+        videoId: CONFIG.youtubeId,
+        playerVars: {
+          autoplay: 0, controls: 0, loop: 1, playlist: CONFIG.youtubeId,
+          playsinline: 1, modestbranding: 1, rel: 0,
+        },
+        events: {
+          onReady: () => { ready = true; if (wantPlay && !ytFailed) player.playVideo(); },
+          onStateChange: (e) => {
+            if (e.data === YT.PlayerState.PLAYING) { source = "yt"; setPlaying(true); }
+            else if ((e.data === YT.PlayerState.PAUSED || e.data === YT.PlayerState.ENDED) && source === "yt") setPlaying(false);
+          },
+          // Video bị tắt nhúng (lỗi 101/150) hoặc lỗi khác → chuyển sang mp3
+          onError: () => { ytFailed = true; if (wantPlay) playFile(); },
+        },
       });
-      btn.classList.add("playing");
-    }
-    playing = !playing;
-  });
+    };
+  }
+
+  // Bắt đầu phát (ưu tiên YouTube, không được thì mp3)
+  function startPlay() {
+    wantPlay = true;
+    if (ytFailed || !CONFIG.youtubeId) { playFile(); return; }
+    if (player && ready) player.playVideo();
+    // chưa ready: đợi onReady; nếu lỗi: onError sẽ gọi playFile()
+  }
+
+  // Nút nhạc góc màn hình: bật/tắt
+  if (btn) {
+    btn.addEventListener("click", () => {
+      if (source === "file" || ytFailed) {
+        if (playing) { audio.pause(); setPlaying(false); }
+        else playFile();
+        return;
+      }
+      if (player && ready) {
+        if (playing) player.pauseVideo();
+        else player.playVideo();
+      } else {
+        startPlay();
+      }
+    });
+  }
+
+  // Mở phong thư → vào thiệp + phát nhạc (cử chỉ người dùng nên trình duyệt cho phát)
+  function openEnvelope() {
+    if (!intro || intro.classList.contains("open")) return;
+    intro.classList.add("open"); // chạy animation mở nắp + lộ lá thư
+    startPlay();
+    setTimeout(() => {
+      intro.classList.add("hide");
+      document.body.style.overflow = ""; // trả lại cuộn trang
+    }, 900);
+    setTimeout(() => { intro.style.display = "none"; }, 1800);
+  }
+  if (openBtn) openBtn.addEventListener("click", openEnvelope);
 })();
 
 /* ── 6. Hộp quà — nhấn để hiện QR ── */

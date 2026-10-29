@@ -571,6 +571,82 @@ body {
 .music-toggle.playing .music-icon { animation: spin 3s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* ─────────────── Màn mở phong thư ─────────────── */
+/* Trình phát YouTube ẩn khỏi màn hình nhưng vẫn phát được tiếng */
+.yt-hidden { position: fixed; left: -9999px; top: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+
+.envelope-intro {
+  position: fixed; inset: 0; z-index: 2000;
+  display: grid; place-items: center; padding: 24px;
+  background: radial-gradient(circle at 50% 32%, #eef7e7, #d7ebcb 68%, #bfddb0);
+  transition: opacity .8s ease, visibility .8s ease;
+}
+.envelope-intro.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.env-stage { display: flex; flex-direction: column; align-items: center; gap: 32px; }
+
+.envelope {
+  position: relative; width: 320px; height: 210px;
+  border: none; background: none; padding: 0; cursor: pointer;
+  filter: drop-shadow(0 22px 42px rgba(61,90,55,.32));
+  transition: transform .4s ease;
+}
+.envelope:hover { transform: translateY(-4px); }
+
+/* thân phong thư (túi sau) */
+.env-back {
+  position: absolute; inset: 0; border-radius: 12px;
+  background: linear-gradient(135deg, var(--sage), var(--rose));
+}
+/* lá thư bên trong */
+.env-letter {
+  position: absolute; left: 16px; right: 16px; top: 16px; bottom: 16px;
+  z-index: 2; background: var(--ivory); border-radius: 8px;
+  box-shadow: 0 6px 16px -10px rgba(61,90,55,.5);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; gap: 6px;
+  transition: transform .7s cubic-bezier(.2,.75,.2,1) .15s;
+}
+.envelope-intro.open .env-letter { transform: translateY(-128px); }
+.env-l-eyebrow { font-size: .72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
+.env-l-names { font-family: var(--font-display); font-size: 1.65rem; font-weight: 600; color: var(--rose-deep); line-height: 1.2; }
+.env-l-names .amp { color: var(--gold); }
+.env-l-date { font-family: var(--font-display); font-size: 1rem; color: var(--muted); letter-spacing: 2px; }
+
+/* túi trước — che phần dưới lá thư, có khía chữ V */
+.env-front {
+  position: absolute; inset: 0; z-index: 3; border-radius: 12px;
+  background: linear-gradient(135deg, var(--rose), var(--sage-deep));
+  clip-path: polygon(0 30%, 50% 66%, 100% 30%, 100% 100%, 0 100%);
+}
+/* nắp phong thư — tam giác gập xuống, mở lên khi nhấn */
+.env-flap {
+  position: absolute; top: 0; left: 0; width: 0; height: 0; z-index: 5;
+  border-left: 160px solid transparent;
+  border-right: 160px solid transparent;
+  border-top: 112px solid var(--sage-deep);
+  transform-origin: top center; transition: transform .6s ease;
+}
+.envelope-intro.open .env-flap { transform: rotateX(180deg); z-index: 1; }
+/* con dấu sáp */
+.env-seal {
+  position: absolute; top: 72px; left: 50%; transform: translateX(-50%);
+  z-index: 6; width: 46px; height: 46px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--gold-soft), var(--gold));
+  display: grid; place-items: center; font-size: 1.25rem;
+  box-shadow: 0 4px 10px -3px rgba(120,90,20,.6);
+  transition: opacity .3s ease, transform .5s ease;
+}
+.envelope-intro.open .env-seal { opacity: 0; transform: translateX(-50%) scale(.4); }
+
+.env-hint {
+  color: var(--rose-deep); font-size: .95rem; letter-spacing: .3px;
+  animation: envpulse 1.8s ease-in-out infinite;
+}
+@keyframes envpulse { 0%,100% { opacity: .6; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-3px); } }
+
+@media (max-width: 400px) { .envelope { transform: scale(.82); } .envelope:hover { transform: scale(.82) translateY(-4px); } }
+
 /* ─────────────── Cánh hoa rơi ─────────────── */
 .petals { position: fixed; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
 .petal {

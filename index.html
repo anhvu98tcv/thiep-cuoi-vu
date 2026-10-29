@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ════════════════════════════════════════════════════════════════
+       👇 TIÊU ĐỀ HIỂN THỊ TRÊN TAB TRÌNH DUYỆT & KHI CHIA SẺ LINK
+       ════════════════════════════════════════════════════════════════ -->
+  <title>Anh Vũ ❤ Hồng Ngọc — Save the Date</title>
+  <meta name="description" content="Trân trọng kính mời bạn đến dự lễ cưới của chúng mình — Anh Vũ & Hồng Ngọc, 14.11.2026." />
+
+  <!-- Thẻ chia sẻ mạng xã hội (Facebook/Zalo) -->
+  <meta property="og:title" content="Thiệp mời cưới — Anh Vũ & Hồng Ngọc" />
+  <meta property="og:description" content="Trân trọng kính mời bạn đến chung vui cùng chúng mình! 14.11.2026" />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts (hỗ trợ tiếng Việt đầy đủ) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css?v=4" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💍</text></svg>" />
+</head>
+
+<body>
+  <!-- Hiệu ứng cánh hoa rơi (được tạo bằng JS) -->
+  <div class="petals" aria-hidden="true"></div>
+
+  <!-- Nút bật/tắt nhạc nền -->
+  <button class="music-toggle" id="musicToggle" aria-label="Bật/tắt nhạc" title="Bật/tắt nhạc nền">
+    <span class="music-icon">♪</span>
+  </button>
+  <!-- 👇 THÊM FILE NHẠC vào assets/music.mp3 để có nhạc nền -->
+  <audio id="bgMusic" loop preload="none">
+    <source src="assets/music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- Thanh điều hướng -->
+  <nav class="navbar" id="navbar">
+    <a href="#home" class="nav-brand">V &amp; N</a>
+    <div class="nav-links">
+      <a href="#couple">Chú rể &amp; Cô dâu</a>
+      <a href="#events">Sự kiện</a>
+      <a href="#gallery">Album</a>
+      <a href="#rsvp">Xác nhận</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+  </nav>
+
+  <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+  <header class="hero" id="home">
+    <div class="hero-overlay"></div>
+    <div class="hero-content reveal">
+      <p class="hero-eyebrow">Save the Date</p>
+      <p class="hero-invite">Trân trọng kính mời bạn đến dự lễ cưới của</p>
+      <!-- 👇 TÊN CÔ DÂU & CHÚ RỂ -->
+      <h1 class="hero-names">
+        <span class="name">Anh Vũ</span>
+        <span class="amp">&amp;</span>
+        <span class="name">Hồng Ngọc</span>
+      </h1>
+      <div class="hero-divider"><span></span>💍<span></span></div>
+      <!-- 👇 NGÀY CƯỚI (hiển thị) -->
+      <p class="hero-date">Thứ Bảy, ngày 14 tháng 11 năm 2026</p>
+      <a href="#rsvp" class="btn btn-hero">Xác nhận tham dự</a>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">
+      <span>Kéo xuống</span>
+      <div class="mouse"></div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════ LỜI NGỎ ═══════════════════════════════ -->
+  <section class="section intro">
+    <div class="container reveal">
+      <div class="leaf-divider" aria-hidden="true">❦</div>
+      <p class="intro-text">
+        Có một người nguyện đi cùng ta đến hết cuộc đời.<br />
+        Có một ngày ta muốn cả thế giới cùng chung vui.<br />
+        Và hôm nay, chúng mình trân trọng mời bạn —<br />
+        người thân thương — đến chứng kiến khoảnh khắc hạnh phúc ấy.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ CÔ DÂU & CHÚ RỂ ═══════════════════════════════ -->
+  <section class="section couple" id="couple">
+    <div class="container">
+      <h2 class="section-title reveal">Chú rể &amp; Cô dâu</h2>
+      <div class="couple-grid">
+        <!-- CHÚ RỂ -->
+        <article class="person-card reveal">
+          <div class="person-photo"><img src="assets/ChuRe.PNG" alt="Chú rể Anh Vũ" /></div>
+          <p class="person-role">Chú rể</p>
+          <h3 class="person-name">Anh Vũ</h3>
+          <p class="person-bio">
+            Một chàng trai ấm áp, luôn muốn mang đến điều tốt đẹp nhất
+            cho người mình yêu thương.
+          </p>
+        </article>
+
+        <div class="couple-heart reveal" aria-hidden="true">❤</div>
+
+        <!-- CÔ DÂU -->
+        <article class="person-card reveal">
+          <div class="person-photo"><img src="assets/CoDau.PNG" alt="Cô dâu Hồng Ngọc" /></div>
+          <p class="person-role">Cô dâu</p>
+          <h3 class="person-name">Hồng Ngọc</h3>
+          <p class="person-bio">
+            Một cô gái dịu dàng, luôn mỉm cười và tin vào những điều
+            ngọt ngào của cuộc sống.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ ĐẾM NGƯỢC ═══════════════════════════════ -->
+  <section class="section countdown-section" id="countdown">
+    <div class="container reveal">
+      <h2 class="section-title light">Còn lại bao lâu nữa...</h2>
+      <p class="countdown-sub">... đến ngày chúng mình chính thức về chung một nhà</p>
+      <div class="countdown" id="countdown">
+        <div class="count-box"><span class="count-num" id="cd-days">00</span><span class="count-label">Ngày</span></div>
+        <div class="count-box"><span class="count-num" id="cd-hours">00</span><span class="count-label">Giờ</span></div>
+        <div class="count-box"><span class="count-num" id="cd-mins">00</span><span class="count-label">Phút</span></div>
+        <div class="count-box"><span class="count-num" id="cd-secs">00</span><span class="count-label">Giây</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ SỰ KIỆN ═══════════════════════════════ -->
+  <section class="section events" id="events">
+    <div class="container">
+      <h2 class="section-title reveal">Sự kiện cưới</h2>
+      <p class="section-sub reveal">Chúng mình rất mong được đón tiếp bạn tại:</p>
+      <div class="events-grid">
+        <!-- TIỆC CƯỚI NHÀ TRAI -->
+        <article class="event-card featured reveal">
+          <div class="event-icon">🥂</div>
+          <h3 class="event-name">Bữa cơm thân mật</h3>
+          <!-- 👇 GIỜ, ĐỊA ĐIỂM TIỆC NHÀ TRAI -->
+          <p class="event-time">08:00 — Thứ Bảy, 14.11.2026</p>
+          <p class="event-place"><strong>Tư gia nhà trai</strong></p>
+          <p class="event-address">Xóm 6 - Làng Hành Thiện, xã Xuân Hồng, tỉnh Ninh Bình</p>
+          <!-- 👇 THAY LINK GOOGLE MAPS -->
+          <a class="btn btn-outline" href="https://www.google.com/maps/" target="_blank" rel="noopener">Xem bản đồ</a>
+        </article>
+        <!-- LỄ THÀNH HÔN (NHÀ TRAI) -->
+        <article class="event-card reveal">
+          <div class="event-icon">🏵️</div>
+          <h3 class="event-name">Lễ Thành Hôn</h3>
+          <!-- 👇 GIỜ, ĐỊA CHỈ NHÀ TRAI -->
+          <p class="event-time">09:00 — Thứ Bảy, 14.11.2026</p>
+          <p class="event-place"><strong>Tư gia nhà trai</strong></p>
+          <p class="event-address">Xóm 6 - Làng Hành Thiện, xã Xuân Hồng, tỉnh Ninh Bình</p>
+          <!-- 👇 THAY LINK GOOGLE MAPS -->
+          <a class="btn btn-outline" href="https://www.google.com/maps/" target="_blank" rel="noopener">Xem bản đồ</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ ALBUM ẢNH ═══════════════════════════════ -->
+  <section class="section gallery" id="gallery">
+    <div class="container">
+      <h2 class="section-title reveal">Album của chúng mình</h2>
+      <p class="section-sub reveal">Một vài khoảnh khắc đáng nhớ 💚</p>
+      <!-- Thêm/bớt ảnh: mỗi ảnh là một <div class="gallery-item"><img ...></div>. Ảnh đầu tiên hiển thị lớn. -->
+      <div class="gallery-grid reveal">
+        <div class="gallery-item"><img src="assets/anh1.jpg" alt="Ảnh cưới 1" loading="lazy" /></div>
+        <div class="gallery-item"><img src="assets/anh2.jpg" alt="Ảnh cưới 2" loading="lazy" /></div>
+        <div class="gallery-item"><img src="assets/anh3.jpg" alt="Ảnh cưới 3" loading="lazy" /></div>
+        <div class="gallery-item"><img src="assets/anh4.jpg" alt="Ảnh cưới 4" loading="lazy" /></div>
+        <div class="gallery-item"><img src="assets/anh5.jpg" alt="Ảnh cưới 5" loading="lazy" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ XÁC NHẬN THAM DỰ (RSVP) ═══════════════════════════════ -->
+  <section class="section rsvp" id="rsvp">
+    <div class="container reveal">
+      <h2 class="section-title">Xác nhận tham dự</h2>
+      <p class="section-sub">Sự có mặt của bạn là niềm vinh hạnh của chúng mình. Vui lòng xác nhận giúp tụi mình nhé!</p>
+
+      <form class="rsvp-form" id="rsvpForm">
+        <div class="form-row">
+          <label>Họ và tên <span class="req">*</span>
+            <input type="text" name="name" required/>
+          </label>
+          <label>Số điện thoại
+            <input type="tel" name="phone"/>
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>Bạn sẽ tham dự chứ? <span class="req">*</span>
+            <select name="attending" required>
+              <option value="">— Chọn —</option>
+              <option value="Có, mình sẽ đến">Có, mình sẽ đến 🎉</option>
+              <option value="Rất tiếc, mình không đến được">Rất tiếc, mình bận mất rồi 💐</option>
+            </select>
+          </label>
+          <label>Số người đi cùng
+            <select name="guests">
+              <option value="Một mình">Chỉ mình tôi</option>
+              <option value="2 người">2 người</option>
+              <option value="3 người">3 người</option>
+              <option value="4 người trở lên">4 người trở lên</option>
+            </select>
+          </label>
+        </div>
+
+        <label>Lời chúc gửi tới cô dâu &amp; chú rể
+          <textarea name="message" rows="3" placeholder="Chúc hai bạn trăm năm hạnh phúc..."></textarea>
+        </label>
+
+        <button type="submit" class="btn btn-submit">Gửi xác nhận 💌</button>
+        <p class="form-status" id="formStatus" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ HỘP QUÀ YÊU THƯƠNG ═══════════════════════════════ -->
+  <section class="section gift" id="gift">
+    <div class="container reveal">
+      <h2 class="section-title gift-title">Hộp quà yêu thương</h2>
+
+      <!-- Nhấn vào hộp quà để hiện QR -->
+      <button class="gift-box" id="giftBox" aria-expanded="false" aria-controls="giftReveal">
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hộp quà">
+          <defs>
+            <linearGradient id="boxg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#c6e4b8" />
+              <stop offset="1" stop-color="#8fc283" />
+            </linearGradient>
+            <linearGradient id="lidg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#b3d9a3" />
+              <stop offset="1" stop-color="#7db271" />
+            </linearGradient>
+          </defs>
+          <path d="M60 50 C53 41 41 41 41 31 C41 23.5 51 21.5 60 29 C69 21.5 79 23.5 79 31 C79 41 67 41 60 50 Z" fill="#a3d094" />
+          <rect x="26" y="60" width="68" height="46" rx="6" fill="url(#boxg)" />
+          <rect x="20" y="48" width="80" height="18" rx="6" fill="url(#lidg)" />
+          <rect x="53" y="48" width="14" height="58" fill="#e7c15a" />
+          <rect x="53" y="48" width="5" height="58" fill="#f3d888" />
+        </svg>
+        <span class="gift-hint">Nhấn để mở quà 💌</span>
+      </button>
+
+      <p class="gift-message">
+        Cảm ơn bạn đã đồng hành và chúc phúc cho<br />
+        hành trình yêu thương của chúng mình.<br />
+        Niềm vui hôm nay trọn vẹn hơn khi có bạn<br />
+        cùng sẻ chia! 🌿
+      </p>
+
+      <!-- QR chỉ hiện sau khi nhấn hộp quà -->
+      <div class="gift-reveal" id="giftReveal">
+        <div class="gift-grid">
+          <div class="gift-card">
+            <div class="gift-icon">🤵</div>
+            <h3>Chú rể</h3>
+            <!-- 👇 THÔNG TIN NGÂN HÀNG CHÚ RỂ. Có ảnh QR thì thay dòng gift-qr bằng:
+                 <div class="gift-qr has-img"><img src="assets/QR-ChuRe.PNG" alt="Mã QR chuyển khoản chú rể" loading="lazy" /></div> -->
+            <p class="gift-bank">Ngân hàng [Tên ngân hàng]</p>
+            <p class="gift-number">[Số tài khoản]</p>
+            <p class="gift-owner">ANH VU</p>
+            <div class="gift-qr" data-label="QR chuyển khoản"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ CHÂN TRANG ═══════════════════════════════ -->
+  <footer class="footer" id="footer">
+    <div class="reveal">
+      <p class="footer-thanks">Cảm ơn bạn rất nhiều!</p>
+      <h2 class="footer-names">Anh Vũ &amp; Hồng Ngọc</h2>
+      <p class="footer-date">14 . 11 . 2026</p>
+      <p class="footer-love">Made with 💚</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=3"></script>
+</body>
+</html>

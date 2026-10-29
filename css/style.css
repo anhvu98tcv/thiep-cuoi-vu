@@ -225,6 +225,7 @@ body {
   background: linear-gradient(90deg, transparent, var(--gold));
 }
 .hero-divider span:last-child { background: linear-gradient(90deg, var(--gold), transparent); }
+.hero-divider .icon-rings { width: 44px; height: 38px; color: var(--gold); flex: none; }
 .hero-date {
   font-family: var(--font-display);
   font-weight: 600;
@@ -378,7 +379,14 @@ body {
 }
 .event-card:hover { transform: translateY(-6px); }
 .event-card.featured { border: 1.5px solid var(--gold-soft); background: linear-gradient(180deg, #fbfef8, #eff7ea); }
-.event-icon { font-size: 2.6rem; margin-bottom: 10px; }
+.event-icon {
+  width: 78px; height: 78px; margin: 0 auto 16px; border-radius: 50%;
+  display: grid; place-items: center;
+  color: var(--gold);
+  background: radial-gradient(circle at 35% 30%, #fff, #eef6e8);
+  box-shadow: inset 0 0 0 1px var(--gold-soft), 0 0 0 5px var(--ivory), 0 0 0 6px rgba(194,162,78,0.25);
+}
+.event-icon svg { width: 46px; height: 42px; }
 .event-name { font-family: var(--font-display); font-weight: 600; font-size: 1.95rem; line-height: 1.2; color: var(--rose-deep); margin-bottom: 10px; }
 .event-time { color: var(--gold); font-weight: 500; font-size: 0.92rem; letter-spacing: 0.5px; margin-bottom: 14px; }
 .event-place { font-size: 1rem; margin-bottom: 4px; }
@@ -462,7 +470,9 @@ body {
   outline: none; border-color: var(--rose);
   box-shadow: 0 0 0 4px rgba(141,191,130,0.22);
 }
-.btn-submit { align-self: center; margin-top: 6px; }
+.btn-submit { align-self: center; margin-top: 6px; display: inline-flex; align-items: center; gap: 8px; }
+/* Icon phong thư (thay emoji 💌) */
+.i-letter { width: 1.25em; height: 1.25em; flex: none; }
 .form-status { text-align: center; font-weight: 500; min-height: 1.2em; }
 .form-status.success { color: var(--sage-deep); }
 .form-status.error { color: var(--rose-deep); }
@@ -501,6 +511,8 @@ body {
   background: rgba(255,255,255,0.12); padding: 6px 18px; border-radius: 999px;
   transition: opacity 0.3s ease;
 }
+.gift-hint { display: inline-flex; align-items: center; gap: 8px; }
+.gift-box .gift-hint svg.i-letter { width: 1.25em; height: 1.25em; filter: none; transform: none; color: var(--gold-soft); }
 .gift-box.opened { animation: none; }
 .gift-box.opened .gift-hint { opacity: 0; visibility: hidden; }
 @keyframes floatBox { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
@@ -641,12 +653,13 @@ body {
   position: absolute; top: 72px; left: 50%; transform: translateX(-50%);
   z-index: 6; width: 46px; height: 46px; border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, var(--gold-soft), var(--gold));
-  display: grid; place-items: center; font-size: 1.25rem;
+  display: grid; place-items: center; font-size: 1.25rem; color: #fffaf0;
   box-shadow: 0 4px 10px -3px rgba(120,90,20,.6);
   will-change: transform, opacity;
   transition: opacity .35s ease, transform .45s cubic-bezier(.5,-0.4,.7,.3);
 }
 .envelope-intro.open .env-seal { opacity: 0; transform: translateX(-50%) scale(.3); }
+.env-seal .icon-rings { width: 28px; height: 25px; }
 
 .env-hint {
   color: var(--rose-deep); font-size: .95rem; letter-spacing: .3px;

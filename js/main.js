@@ -15,7 +15,7 @@ const CONFIG = {
   //   Ví dụ: "https://script.google.com/macros/s/AKfycb.../exec"
   // Hướng dẫn: xem README.md, mục "Lưu xác nhận vào Google Sheet".
   // Để trống "" thì form vẫn chạy (hiện lời cảm ơn) nhưng KHÔNG lưu lại.
-  rsvpEndpoint: "https://script.google.com/macros/s/AKfycbzMKlnoIbjilDAZHJbM87_TeKlIPaPgKFDnepkzNHEQ2LbDdxgqmnWgZKX9QSIhQfSkRg/exec",
+  rsvpEndpoint: "https://script.google.com/macros/s/AKfycbwAO6dGPXDokl2e8Cqg4yhi2dGdEZ0vaUqMjYy2tjYLV1OydV8DplsfOC4rtN2yxAPq/exec",
 
   // Nhạc nền lấy từ YouTube — dán ID video vào đây (phần sau "watch?v=").
   // Hiện tại là bài "I Do" (911): https://www.youtube.com/watch?v=pBTp2RWxq-s
@@ -47,7 +47,7 @@ const CONFIG = {
     if (diff <= 0) {
       el.days.textContent = el.hours.textContent = el.mins.textContent = el.secs.textContent = "00";
       const sub = document.querySelector(".countdown-sub");
-      if (sub) sub.textContent = "Chúng mình đã chính thức về chung một nhà! 💍";
+      if (sub) sub.textContent = "Chúng mình đã chính thức về chung một nhà! 💚";
       return;
     }
     el.days.textContent = pad(Math.floor(diff / 86400000));

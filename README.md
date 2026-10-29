@@ -63,7 +63,8 @@ Mặc định form chỉ hiện lời cảm ơn. Để mỗi lần khách bấm 
    rsvpEndpoint: "https://script.google.com/macros/s/.../exec",
    ```
 7. Mở thiệp, gửi thử một xác nhận → trong Sheet sẽ xuất hiện trang tính **RSVP** với các cột
-   *Thời gian, Họ và tên, Số điện thoại, Tham dự, Số người, Lời chúc*.
+   *Thời gian, Họ và tên, Số điện thoại, Tham dự, Số người, Xe đưa đón, Lời chúc*.
+   (Mở thử URL `/exec` trên trình duyệt sẽ thấy dòng "RSVP nhà trai đang hoạt động".)
 
 > Nếu sau này sửa code trong Apps Script, phải vào **Triển khai → Quản lý các bản triển khai → ✏️ → Phiên bản: Mới → Triển khai** thì thay đổi mới có hiệu lực (URL giữ nguyên).
 
